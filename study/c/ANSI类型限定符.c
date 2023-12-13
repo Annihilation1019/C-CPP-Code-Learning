@@ -32,7 +32,7 @@ int main()
     p1 = &locked[1];        // 合法
 
     // 不能把const数据的地址赋给指向非const的指针
-    double *p2 = locked; // 不合法.这个规则非常合理,否则可以通过p2修改locked的值,这样就违背了const的初衷
+    //double *p2 = locked; // 不合法.这个规则非常合理,否则可以通过p2修改locked的值,这样就违背了const的初衷
     // 但是可以通过强制类型转换来实现
     double *p3 = (double *)locked; // 合法,但是不建议这么做,因为这样会使得const失去作用
 

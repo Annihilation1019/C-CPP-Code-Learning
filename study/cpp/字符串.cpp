@@ -7,7 +7,7 @@ int main()
     // cin存在的问题：使用空白来确定字符串的结束位置（空格、制表符、换行符）
     char str[LEN];
     char str1[LEN];
-    cout << "输入一个字符串：" << endl; // 如果输入的是两个单词，则不会等待下一次输入了
+    cout << "输入一个字符串：" << endl; // 如果输入的是两个单词，则不会等待下一次输入了，因为cin会把空格当作字符串的结束，而且会把空格从输入流中删除，所以第二次输入时不会等待，而是直接读取输入流中的内容
     cin >> str;
     cout << "输入的字符串是：" << str << endl;
     cout << "再输入一个字符串：" << endl;
@@ -26,7 +26,7 @@ int main()
     char name[LEN], name1[LEN];
     cout << "输入姓名：" << endl;
     cin.get(name, LEN).get(); // 读取姓名，然后读取并丢弃换行符
-    cin.get(name1, LEN);      // cin.get(name, LEN);cin.get();cin.get(name1, LEN);等效于cin.get(name, LEN).get(name1, LEN);
+    cin.get(name1, LEN);      // cin.get(name, LEN);cin.get();cin.get(name1, LEN);等效于cin.getline(name, LEN).getline(name1, LEN);
 
     cout << "姓名是：" << name << endl;
     cout << "姓名是：" << name1 << endl;

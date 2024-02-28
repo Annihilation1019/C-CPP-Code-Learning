@@ -14,7 +14,7 @@ int main()
     cout << cin_test << endl;
 
     // 赋值、拼接和附加
-    string test4 = "hello";
+    string test4 = "hello";//可以用c风格字符串初始化string类对象，string类定义了一种char*到string对象的隐式转换
     string test_receive;
     test_receive = test4;
     cout << test_receive << endl; // 不能将数组赋给一个数组，但是可以将一个string类对象赋给另一个string类对象（更详细的说string对象可以作为被赋值者，但数组不能，数组可以给string对象赋值）
@@ -58,5 +58,21 @@ a "raw" string literal.))+*" // 按回车不仅会移动到下一行，还会在
     char16_t utf16_string[] = u"This is a UTF-16 string literal."; // UTF-16字符串字面值，以u开头
     char32_t utf32_string[] = U"This is a UTF-32 string literal."; // UTF-32字符串字面值，以U开头*/
 
+    // 比较string类对象（对关系运算符进行了重载）
+    // 使用条件：至少有一个运算对象是string类对象，另一个可以是string类对象，也可以是C-风格字符串
+    string test_compare1 = "hello";
+    string test_compare2 = "world";
+    if (test_compare1 == test_compare2)
+    {
+        cout << "test_compare1 == test_compare2" << endl;
+    }
+    else if (test_compare1 > test_compare2)
+    {
+        cout << "test_compare1 > test_compare2" << endl;
+    }
+    else
+    {
+        cout << "test_compare1 < test_compare2" << endl;
+    }
     return 0;
 }

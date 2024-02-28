@@ -2,3 +2,6 @@
 *.dat
 tools/
 .vscode/
+*.json
+.vs
+c_cpp_project.code-workspace

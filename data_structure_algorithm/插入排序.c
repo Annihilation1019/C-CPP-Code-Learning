@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 void swap(int *a, int *b)
 {
     if (*a != *b)
@@ -9,23 +10,18 @@ void swap(int *a, int *b)
         *a ^= *b;
     }
 }
-int find_min(int begin,int end,int arr[])
+void insertion_sort(int arr[], int len)
 {
-    int min = begin;
-    for (int i = begin+1; i <= end; i++)
+    int j;
+    for (int i = 1; i < len - 1; i++)
     {
-        if (arr[i]<arr[min])
+        j = i + 1;
+        /* 连续冒泡，直到有比它小/大的 */
+        while (j - 1 >= 0 && arr[j] < arr[j - 1])
         {
-            min = i;
+            swap(&arr[j], &arr[j - 1]);
+            j--;
         }
-    }
-    return min;
-}
-void Selection_sort(int arr[],int len)
-{
-    for (int i = 0; i < len; i++)
-    {
-        swap(&arr[i], &arr[find_min(i, len, arr)]);
     }
 }
 int main()
@@ -37,7 +33,7 @@ int main()
     {
         scanf("%d", arr + i);
     }
-    Selection_sort(arr, N);
+    insertion_sort(arr, N);
     for (int i = 0; i < N; i++)
     {
         printf("%d ", arr[i]);

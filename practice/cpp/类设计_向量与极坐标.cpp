@@ -8,6 +8,11 @@ using std::cos;
 using std::pow;
 using std::sin;
 using std::sqrt;
+enum MODE
+{
+    RECT,
+    POL
+};
 namespace VECTOR
 {
     /**
@@ -23,11 +28,12 @@ namespace VECTOR
         double r;
 
     public:
-        Vector(int mode = 0, double x = 0, double y = 0);
+        Vector(double x = 0, double y = 0, MODE mode = RECT);
         void Reset(double x, double y);
         ~Vector() = default;
         Vector operator+(Vector &another);
         Vector operator-(Vector &another);
+        Vector operator-() { return Vector(-x, -y); }
         double operator*(Vector &another) { return x * another.x + y * another.y; }
         friend Vector operator*(double n, const Vector &vec);
         bool operator<(Vector &another) { return r < another.r; }
@@ -40,34 +46,41 @@ namespace VECTOR
 using VECTOR::Vector;
 int main()
 {
-    Vector vec1(0, 1, 2);
-    Vector vec2(1, 1, PI);
-    Vector vec3(0, 2, 5);
+    Vector vec1(1, 2, RECT);
+    Vector vec2(1, PI, POL);
+    Vector vec3(2, 5, RECT);
     Vector vec4 = 2 * vec1;
+    Vector vec5(1, 1, (MODE)1);
+    Vector vec6 = (1,1,RECT);
     double val = vec1 * vec3;
     std::cout << vec1 << std::endl;
     std::cout << vec2 << std::endl;
     std::cout << vec3 << std::endl;
     std::cout << vec4 << std::endl;
     std::cout << "vec1*vec3：" << val << std::endl;
+    std::cout << -vec1 << std::endl; // 负号重载
     return 0;
 }
 
-Vector::Vector(int mode, double a, double b)
+Vector::Vector(double a, double b, MODE mode)
 {
-    if (mode == 0)
+    if (mode == RECT)
     { // 直角坐标模式
         this->x = a;
         this->y = b;
         this->r = sqrt(pow(a, 2) + pow(b, 2));
         this->rad = atan2(b, a);
     }
-    else if (mode == 1)
+    else if (mode == POL)
     { // 极坐标模式
         this->r = a;
         this->rad = b;
         this->x = a * cos(b);
         this->y = a * sin(b);
+    }
+    else
+    {
+        std::cout << "Invalid mode!" << std::endl;
     }
 }
 
